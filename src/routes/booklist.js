@@ -1,13 +1,12 @@
 module.exports = router => {
-  /**
-   * 搜索联想词
-   */
-  router.get('/search_suggest', async(req, res) => {
+  router.get('/booklist', async(req, res) => {
     try {
       const result = await router.axios({
-        url: '/books/auto-suggest',
+        url: '/category/booklist',
         data: {
-          query: req.query.keyword
+          node: req.query.id,
+          size: req.query.limit,
+          st: req.query.start
         }
       }, 'b')
       res.send(result)

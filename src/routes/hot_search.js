@@ -7,7 +7,7 @@ module.exports = (router) => {
       const result = await router.axios({
         url: '/book/search-hotwords'
       })
-      res.send(result.data)
+      res.send(result)
     } catch (err) {
       res.send({ code: -100, msg: err.message })
     }

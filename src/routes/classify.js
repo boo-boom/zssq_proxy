@@ -8,7 +8,7 @@ module.exports = (router) => {
       const result = await router.axios({
         url: '/category/statics'
       }, 'b')
-      res.send(result.data)
+      res.send(result)
     } catch (err) {
       res.send({ code: -100, msg: err.message })
     }

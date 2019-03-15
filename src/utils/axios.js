@@ -1,19 +1,48 @@
 const axios = require('axios')
 const tool = require('./tool')
 
-module.exports = (opt, curl='api') => {
-  const requestData = {
-    url: opt.url,
-    method: opt.method || 'get',
-    baseURL: `https://${curl}.zhuishushenqi.com`,
-    headers: {
-      'User-Agent': tool.randomUserAgent()
+module.exports = (options, curl = 'api') => {
+  const formatParams = (opt) => {
+    const requestData = {
+      url: opt.url,
+      method: opt.method || 'get',
+      baseURL: `https://${curl}.zhuishushenqi.com`,
+      headers: {
+        'User-Agent': tool.randomUserAgent()
+      }
     }
+    if (requestData.method === 'get') {
+      requestData.params = opt.data;
+    } else {
+      requestData.data = opt.data;
+    }
+    return requestData;
   }
-  if(requestData.method === 'get') {
-    requestData.params = opt.data;
+
+  if (Object.prototype.toString.call(options) !== '[object Array]') {
+    return new Promise((resolve, reject) => {
+      axios(formatParams(options)).then(res => {
+        resolve(res.data)
+      }).catch(err => {
+        reject(err)
+      })
+    })
   } else {
-    requestData.data = opt.data;
+    const requestArr = options.map(item => {
+      return axios(formatParams(item))
+    });
+    return new Promise((resolve, reject) => {
+      axios.all(requestArr).then(axios.spread((...arg) => {
+        const content = arg.map(item => {
+          if (item.data.ok) {
+            return item.data
+          }
+          return {}
+        })
+        resolve(content)
+      })).catch(err => {
+        reject(err)
+      })
+    })
   }
-  return axios(requestData)
 }
