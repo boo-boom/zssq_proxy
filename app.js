@@ -11,7 +11,7 @@ router.axios = $axios;
 // 设置允许跨域访问该服务
 app.all('*', function (req, res, next) {
   const origin = req.headers.origin;
-  if(origin == 'http://localhost:4000' || origin == 'http://192.168.140.73:4000' || origin == 'http://zssq.hoohmm.com') {
+  if(origin == 'http://localhost:4000' || origin == 'http://192.168.140.73:4000' || origin == 'http://book.hoohmm.com') {
     res.header('Access-Control-Allow-Origin', origin);
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
