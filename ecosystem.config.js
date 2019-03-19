@@ -22,6 +22,7 @@ module.exports = {
       ref  : 'origin/master',
       repo : 'git@github.com:boo-boom/zssq_proxy.git',
       path : '/home/ubuntu/www/zssq_proxy',
+      "ssh_options": "StrictHostKeyChecking=no",
       'post-deploy' : 'npm install && pm2 reload ecosystem.config.js --env production'
     }
   }
