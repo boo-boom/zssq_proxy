@@ -8,7 +8,10 @@ module.exports = (router) => {
     try {
       const result = await router.axios({
         url: '/category/group-minlist',
-        data: { type: req.query.type }
+        data: {
+          type: req.query.type,
+          packageName: 'com.ifmoc.ZhuiShuShenQi'
+        }
       }, 'b')
       res.send(result)
     } catch (err) {

@@ -1,12 +1,12 @@
 const axios = require('axios')
 const tool = require('./tool')
 
-module.exports = (options, curl = 'api') => {
+module.exports = (options, curl = 'api', scheme = 'https') => {
   const formatParams = (opt) => {
     const requestData = {
       url: opt.url,
       method: opt.method || 'get',
-      baseURL: `https://${curl}.zhuishushenqi.com`,
+      baseURL: `${scheme}://${curl}.zhuishushenqi.com`,
       headers: {
         'User-Agent': tool.randomUserAgent()
       }

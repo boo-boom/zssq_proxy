@@ -1,3 +1,9 @@
+/**
+ * 数据关联的联想词
+ * @api /auto_suggest
+ * @param {string} query 关键字
+ */
+
 module.exports = router => {
   router.get('/auto_suggest', async(req, res) => {
     try {
