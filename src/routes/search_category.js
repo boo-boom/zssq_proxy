@@ -5,6 +5,7 @@
  * @param {number} model.limit 分页长度
  * @param {number} model.contentType2 返回类型 1:书籍 2:漫画
  */
+
 module.exports = (router) => {
   router.get('/search_category', async (req, res) => {
     try {
